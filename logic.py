@@ -82,7 +82,7 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 	
 	def display_screen1(self,value):
 		self.display.setText(value)
-	
+	#displays values on screen
 	def calculation(self):
 		screen_value=self.store
 		screen_value=str(screen_value)
