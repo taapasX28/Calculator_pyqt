@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'calculator.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
@@ -151,4 +144,3 @@ class Ui_Dialog(object):
         self.ln.setText(_translate("Dialog", "ln", None))
         self.e.setText(_translate("Dialog", "e", None))
         self.pi.setText(_translate("Dialog", "π", None))
-
