@@ -10,3 +10,5 @@ This is a basic PyQt based scientific calculator
 * `calculator.py` is extract code of the UI using PyQt.
 
 * Any `input.ui` file can be converted to `output.py` by `pyuic4 input.ui -o output.py` for pyqt4 dependencies.
+
+* You can also go through these set of videos for understanding the framework and functioning of qt designer. Click [here](https://www.youtube.com/watch?v=iDJlGV8Rvgg).
