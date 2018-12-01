@@ -1,3 +1,5 @@
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/) 
+
 # PyQt Calculator
 This is a basic PyQt based scientific calculator 
 
