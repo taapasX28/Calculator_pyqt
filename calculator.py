@@ -143,4 +143,4 @@ class Ui_Dialog(object):
         self.b_close.setText(_translate("Dialog", ")", None))
         self.ln.setText(_translate("Dialog", "ln", None))
         self.e.setText(_translate("Dialog", "e", None))
-        self.pi.setText(_translate("Dialog", "π", None))
+        self.pi.setText(_translate("Dialog", "pi", None))
