@@ -86,11 +86,27 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 	def calculation(self):
 		screen_value=self.store
 		screen_value=str(screen_value)
-		final_value=eval(screen_value)
-		final_value=str(final_value)
+		temp = "".join(reversed(screen_value))
+		a = screen_value.find("/ 0")
+		b = screen_value.find(" math.log10( -")		
+		c = screen_value.find(" math.sqrt(  -")
+		d = screen_value.find(" (math.log10(math.e))**(-1) * math.log10(  -")
+		if(a != -1):
+			final_value = "Math Error : Division by zero"	
+		elif(c != -1):
+			final_value = "Math Error : Negative in square root not allowed"
+		elif(b != -1):
+			final_value = "Math Error : Negative in log not allowed"
+		elif(d != -1):	
+			final_value = "Math Error : Negative in log not allowed"
+		else:
+			final_value=eval(screen_value)
+			final_value=str(final_value)
+		
 		self.store=final_value
 		print(self.store)
 		self.display_screen1(final_value)
+	
 	
 
 if __name__== '__main__':
