@@ -8,6 +8,7 @@ import numpy as np
 import pyqtgraph as pg
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+prev= ""
 
 class Graph(QtGui.QMainWindow): #Auxiliary class to display pop-up for inputting range
     def __init__(self,parent = None):
@@ -18,9 +19,9 @@ class Graph(QtGui.QMainWindow): #Auxiliary class to display pop-up for inputting
 	page.start = QLabel(page)
         page.start.setText('Start:')
         page.end = QLabel(page)
-        page.end.setText('End:') 
+        page.end.setText('End:')
         page.step = QLabel(page)
-        page.step.setText('Step size:')              
+        page.step.setText('Step size:')
 	self.button = QPushButton('Plot', page)
 	self.edit1 = QLineEdit()
 	self.edit2 = QLineEdit()
@@ -31,7 +32,7 @@ class Graph(QtGui.QMainWindow): #Auxiliary class to display pop-up for inputting
 	page.end.move(20,85)
 	self.edit1.move(80,140)
 	page.step.move(20,145)
-	vbox1 = QVBoxLayout()	
+	vbox1 = QVBoxLayout()
 	vbox1.addWidget(self.edit1)
 	vbox1.addWidget(self.edit2)
 	vbox1.addWidget(self.edit3)
@@ -50,13 +51,13 @@ class Graph(QtGui.QMainWindow): #Auxiliary class to display pop-up for inputting
 	print("In Second")
 	print(s)
 	y = eval(s)
-	pg.setConfigOption('background', 'w')      # sets background white                                                 
+	pg.setConfigOption('background', 'w')      # sets background white
     	pg.setConfigOption('foreground', 'k')      # sets axis color to black
 	pw = pg.plot(x,y,pen = 'k')
 	pw.setTitle('y = f(x)')
    	pw.setLabel('bottom', 'x -->')           	# x-label
     	pw.setLabel('left', 'y = f(x) -->')             # y-label
-    	
+
 class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 	def btnstate(self,r1):
 		if r1.isChecked() == True:
@@ -68,7 +69,6 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 			self.log.hide()
 			self.ln.hide()
 			self.sq_root.hide()
-
 		else:
 			self.bco.hide()
 			self.arg.hide()
@@ -78,7 +78,6 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 			self.log.show()
 			self.ln.show()
 			self.sq_root.show()
-			self.e.show()
 
 	def __init__(self):
 		super(calculator_class, self).__init__()
@@ -140,7 +139,13 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 		self.tan.clicked.connect(lambda:self.display_screen(' tan( '))
 		self.tan.clicked.connect(lambda:self.storage(' np.tan( ',1))
 		self.sq_root.clicked.connect(lambda:self.display_screen(' sqrt( '))
-		self.sq_root.clicked.connect(lambda:self.storage(' np.sqrt( ',1))
+		self.sq_root.clicked.connect(lambda:self.storage(' math.sqrt( ',1))
+		self.sin1.clicked.connect(lambda:self.display_screen(' arcsin( '))
+		self.sin1.clicked.connect(lambda:self.storage('math.asin( ',1))
+		self.cos1.clicked.connect(lambda:self.display_screen(' arccos( '))
+		self.cos1.clicked.connect(lambda:self.storage(' math.acos( ',1))
+		self.tan1.clicked.connect(lambda:self.display_screen(' arctan( '))
+		self.tan1.clicked.connect(lambda:self.storage(' math.atan( ',1))
 		self.power.clicked.connect(lambda:self.display_screen(' ^ '))
 		self.power.clicked.connect(lambda:self.storage(' ** ',1))
 		self.b_close.clicked.connect(lambda:self.display_screen(' ) '))
@@ -154,7 +159,7 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 		self.graph.clicked.connect(self.graphing)
 		self.x.clicked.connect(lambda:self.display_screen(' x '))
 		self.x.clicked.connect(lambda:self.storage(' x ',1))
-		self.plot.clicked.connect(self.plott)	
+		self.plot.clicked.connect(self.plott)
 		self.display.setReadOnly(True)
 	var = ""
 	store= ""
@@ -163,13 +168,13 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 	stack_disp = []
 	temp = []
 	def graphing(self):
-		self.flag = 1		
+		self.flag = 1
 		print("Welcome to graphs")
 		print("Enter the equation f(x) : ")
 		self.display.setText("Enter the equation f(x) : ")
-		self.store = ""		
+		self.store = ""
     	def plott(self):
-    		print(self.store) 
+    		print(self.store)
     		x = np.arange(1,2,0.1) #Just to check if equation enter for plotting is syntactically correct or not
     		try:
     			y = eval(self.store)
@@ -218,7 +223,7 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 			if(self.flag == 1):
 				self.display.setText("Enter the equation f(x) : ")
 				self.temp = self.stack_disp
-				value = ''.join(self.temp)		
+				value = ''.join(self.temp)
 				self.display.insert(value)
 			else:
 				self.temp = self.stack_disp
@@ -244,9 +249,9 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 			self.stack.append('#') #Done so as to pop once in order to remove the error message from disp and secondly to pop the wrong input
 			self.display_error("Math Error : Division by Zero")
 		except ValueError:
-			print("Math Error : No negatives in sqrt/log")
+			print("Math Error :No negatives in sqrt/log ,cos-1 & sin-1 b/w -1 & 1")
 			self.stack.append('#')
-			self.display_error("Math Error : No negatives in sqrt/log")
+			self.display_error("Math Error :No negatives in sqrt/log ,cos-1 & sin-1 b/w -1 & 1 ")
 		except SyntaxError:
 			print("Improper equation entered")
 			self.stack.append('#')
@@ -261,7 +266,7 @@ class calculator_class(calculator.Ui_Dialog,QtGui.QMainWindow):
 			self.stack.append(final_value)
 			print(self.store)
 			self.disp_res(" = " + final_value)
-			
+
 
 
 
